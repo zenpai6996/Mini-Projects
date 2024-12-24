@@ -1,0 +1,3 @@
+[submodule "Rock-paper-scissor-game"]
+	path = Rock-paper-scissor-game
+	url = https://github.com/zenpai6996/Rock-paper-scissor-game.git
