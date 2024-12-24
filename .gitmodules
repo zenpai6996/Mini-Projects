@@ -1,3 +1,6 @@
 [submodule "Rock-paper-scissor-game"]
 	path = Rock-paper-scissor-game
 	url = https://github.com/zenpai6996/Rock-paper-scissor-game.git
+[submodule "Calculator-project"]
+	path = Calculator-project
+	url = https://github.com/zenpai6996/Calculator-project.git
