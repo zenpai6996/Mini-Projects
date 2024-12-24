@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>COIN TOSS GAME</title>
+    </head>
+    <body>
+        <P> COIN TOSS GAME </P>
+        <P> CHOOSE HEADS OR TAILS </P>
+        <button onclick="playCoinTossGame('Heads')">Heads</button>
+        <button onclick="playCoinTossGame('Tails')">Tails</button>
+        <p class="js-result1"></p>
+        <p class="js-moves1"></p>
+        <p class="js-score1"></p>
+        <button onclick="
+            score.wins= 0;
+            score.losses=0;
+            localStorage.removeItem('score');
+            updateScoreElement1();
+        ">Reset Score</button>
+
+        <script src="coin-toss.js"></script>
+    </body>
+</html>
