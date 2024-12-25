@@ -8,7 +8,9 @@ let birdWidth = 34;//*width-height ratio : 408/228 : 17/12
 let birdHeight = 24;
 let birdX = boardWidth/8;
 let birdY = boardHeight/2;//*to get the bird png on the right position on the canvas
-let birdImg;
+// let birdImg;
+let birdImgs = [];
+let birdImgsIndex = 0;
 
 let bird = {
   x : birdX,
@@ -32,7 +34,13 @@ let velocityY = 0;// bird jump speed
 let gravity =  0.4;
 let gameOver = false;
 let score = 0;
+let wingSound = new Audio("sounds/sfx_swooshing.wav");
+let hitSound = new Audio("sounds/sfx_die.wav");
+let bgm = new Audio("sounds/bgm_mario.mp3");
+bgm.loop = true;
+let pointSound = new Audio("sounds/sfx_point.wav");
 let cheatModeActive = false;
+
 
 window.onload = function(){
   board = document.getElementById("board");
@@ -46,13 +54,17 @@ window.onload = function(){
   // context.fillRect(bird.x , bird.y ,bird.width , bird.height);
 
   //todo: load bird image
-  
-  birdImg = new Image();
-  birdImg.src = "assets/flappybird.png";
-  birdImg.onload = function(){
-  context.drawImage(birdImg , bird.x, bird.y, bird.width,bird.height);   //! draws the bird image on the the campus when loaded similar to the fillRect function
+  // birdImg = new Image();
+  // birdImg.src = "assets/flappybird.png";
+  // birdImg.onload = function(){
+  // context.drawImage(birdImg , bird.x, bird.y, bird.width,bird.height);   //! draws the bird image on the the campus when loaded similar to the fillRect function
+  // }
 
-  }
+    for(let i=0; i<4 ;i++){
+      let birdImg = new Image();
+      birdImg.src = `assets/flappybird${i}.png`;
+      birdImgs.push(birdImg);
+    }
 
   //todo: load bottom and top pipe image
 
@@ -63,10 +75,13 @@ window.onload = function(){
 
   requestAnimationFrame(update);
   setInterval(placePipes , 1500);  //! places pipes every 1.5 seconds
+  setInterval(animateBird , 100)//every 1/10th of a second
   
   //! event listener to check for button press to move the bird up
+
   document.addEventListener("keydown",cheatMode);
   document.addEventListener("keydown",moveBird);
+  
 
 }
 
@@ -80,11 +95,18 @@ function update(){
   context.clearRect( 0 , 0 , board.width , board.height );//*clearing the canvas so that the frames dont stack on eachother
 
   velocityY += gravity;
+
   // bird.y += velocityY;
-  bird.y = Math.max(bird.y + velocityY , 0); //apply gravity and make sure it doesnt go past the canvas
+
+  bird.y = Math.max(bird.y + velocityY ,
+   0);
+    //apply gravity and make sure it doesnt go past the canvas
   
   //? drawing bird over and over for each frame
-  context.drawImage(birdImg , bird.x, bird.y, bird.width , bird.height);
+  // context.drawImage(birdImg , bird.x, bird.y, bird.width , bird.height);
+  context.drawImage(birdImgs[birdImgsIndex] , bird.x, bird.y, bird.width , bird.height);
+  // birdImgsIndex++;// increment to next frame
+  // birdImgsIndex %= birdImgs.length ;//circle back with modulus, max frame is 4//012301230123
 
   if(bird.y > boardHeight){
     gameOver = true ;
@@ -98,6 +120,7 @@ function update(){
 
     if(!pipe.passed && bird.x > pipe.x + pipe.width){
       score += 0.5;//otherwise score will increase by 2 due to 2 pipes up and down.
+      pointSound.play();
       pipe.passed = true;
     }
     if(!cheatModeActive){
@@ -111,6 +134,7 @@ function update(){
     }
 
     if(detectCollision(bird , pipe)){
+      hitSound.play();
       gameOver = true ;
     }
 
@@ -128,9 +152,16 @@ function update(){
 
   if(gameOver){
     context.fillText("GAME OVER :)", 40 , 320 );
+    bgm.pause();
+    bgm.currentTime = 0;
   }
 
   
+}
+
+function animateBird(){
+  birdImgsIndex++;// increment to next frame
+  birdImgsIndex %= birdImgs.length ;
 }
 
 function placePipes(){
@@ -178,6 +209,11 @@ function placePipes(){
 
 function moveBird(e){// e is the parameter for thekey event 
   if (e.code == "Space" || e.code == "ArrowUp" || e.code == "KeyW"){
+
+    if(bgm.paused){
+      bgm.play();
+    }
+    // wingSound.play();
     //jump
     velocityY = -6;
 
