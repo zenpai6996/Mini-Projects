@@ -150,8 +150,17 @@ function update(){
   context.font = "40px sans-serif";
   context.fillText(score , 5 , 45); //x pos. -> 5 , y pos. -> 45
 
+  context.fillStyle = "black";
+  context.font = "15px sans-serif";
+  context.fillText("by Souharda - git: zenpai6996", 5, boardHeight - 10);
+
   if(gameOver){
+    context.fillStyle = "white";
+    context.font = "40px sans-serif";
     context.fillText("GAME OVER :)", 40 , 320 );
+
+    
+    
     bgm.pause();
     bgm.currentTime = 0;
   }
