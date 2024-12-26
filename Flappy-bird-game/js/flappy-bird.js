@@ -81,7 +81,7 @@ window.onload = function(){
 
   document.addEventListener("keydown",cheatMode);
   document.addEventListener("keydown",moveBird);
-  
+  document.addEventListener("touchstart", moveBird); 
 
 }
 
