@@ -230,6 +230,7 @@ function moveBird(e){// e is the parameter for thekey event
 }
 function cheatMode(e){
   if(e.code == 'KeyX'){
+   
    cheatModeActive = !cheatModeActive;
   }
 }
