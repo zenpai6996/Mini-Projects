@@ -225,6 +225,22 @@ function moveBird(e){// e is the parameter for thekey event
       gameOver = false ;
     }
 
+  }else if (e.type === "touchstart") {
+    velocityY = -6; // Adjust the jump height as needed
+    if(bgm.paused){
+      bgm.play();
+    }
+    // wingSound.play();
+    //jump
+    velocityY = -6;
+
+    //reset game
+    if(gameOver){
+      bird.y = birdY;
+      pipeArray = [];
+      score = 0;
+      gameOver = false ;
+    }
   }
 
 }
