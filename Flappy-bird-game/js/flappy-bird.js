@@ -159,15 +159,18 @@ function update(){
     context.font = "40px sans-serif";
     context.fillText("GAME OVER :)", 40 , 320 );
 
-    
+    setTimeout(resetGame,1000);
     
     bgm.pause();
     bgm.currentTime = 0;
+    
   }
 
   
 }
-
+function resetGame(){
+  window.location.href = "index.html";
+}
 function animateBird(){
   birdImgsIndex++;// increment to next frame
   birdImgsIndex %= birdImgs.length ;

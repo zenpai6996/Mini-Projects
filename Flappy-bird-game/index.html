@@ -3,11 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Flappy Bird</title>
+  <title>Flappy Bird - Home</title>
   <link rel="stylesheet" href="flappy-bird.css">
-  <script src="js/flappy-bird.js"></script>
 </head>
-<body>
-    <canvas id="board"></canvas>
+<body style="font-family: 'Courier New', Courier, monospace;
+text-align: center;
+background-color: skyblue;
+background-image: url('wp6956942.webp');
+background-size: cover;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;">
+  <div id="home-page" class="home-container">
+    <h1>Flappy Bird</h1>
+    <button id="start-button" onclick="startGame()" class="start-button">Start Game</button>
+  </div>
+  <script>
+    function startGame() {
+      window.location.href = "game.html";
+    }
+  </script>
 </body>
 </html>

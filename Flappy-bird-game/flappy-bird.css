@@ -4,6 +4,26 @@ body{
 }
 #board{
   /* background-color: skyblue; */
-  background-image: url("./flappybirdbg.png");
+  background-image: url("assets/flappybirdbg.png");
 
+
+}
+.home-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+}
+
+.start-button{
+  border-radius: 50px;
+  border-color: rgb(49, 202, 244);
+  background-color: rgb(223, 219, 217);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+  font-size: larger;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+  font-weight: 500;
+  transition: background-color 0.1s ease, color 0.3s ease ; 
+  cursor: pointer;
 }
