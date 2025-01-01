@@ -159,7 +159,7 @@ function update(){
     context.font = "40px sans-serif";
     context.fillText("GAME OVER :)", 40 , 320 );
 
-    setTimeout(resetGame,1000);
+    setTimeout(resetGame,340);
     
     bgm.pause();
     bgm.currentTime = 0;
